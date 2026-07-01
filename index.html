@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>IV Monitor</title>
+  <style>
+    body { font-family: Arial; background: #e8f0fe; color: #1a237e; padding: 30px; }
+    h1   { color: #1565c0; }
+    h2   { color: #1565c0; margin-top: 30px; }
+    table { border-collapse: collapse; margin-top: 10px; }
+    th { background: #1565c0; color: white; padding: 8px 12px; }
+    td { padding: 7px 12px; border-bottom: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+  <h1>Sistem Monitorizare Perfuzie IV</h1>
+  <p>Ultima actualizare: {{ data.ultima_actualizare }}</p>
+
+  <h2>Date Pacient</h2>
+  <p>Nume: {{ patient.nume }}</p>
+  <p>CNP: {{ patient.cnp }}</p>
+  <p>Varsta: {{ patient.varsta }}</p>
+  <p>Oras: {{ patient.oras }}</p>
+  <p>Salon: {{ patient.salon }}</p>
+
+  <h2>Parametri Live</h2>
+  <p>Setpoint: {{ data.setpoint }} pic/min</p>
+  <p>Debit: {{ data.debit }} pic/min</p>
+  <p>Flux: {{ data.flux }}</p>
+  <p>Stare: {{ data.stare }}</p>
+  <p>Pompa: {{ data.pompa }}</p>
+  <p>Buzzer: {{ data.buzzer }}</p>
+
+  <h2>Statistici</h2>
+  <p>Total evenimente: {{ stats.total }}</p>
+  <p>NOFLOW: {{ stats.NOFLOW }}</p>
+  <p>LOW: {{ stats.LOW }}</p>
+  <p>PESTE: {{ stats.PESTE }}</p>
+  <p>DANGER: {{ stats.DANGER }}</p>
+
+  <h2>Istoric Evenimente (ultimele 20)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Timp</th>
+        <th>Pacient</th>
+        <th>Setpoint</th>
+        <th>Debit</th>
+        <th>Flux</th>
+        <th>Stare</th>
+        <th>Pompa</th>
+        <th>Buzzer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ev in events %}
+      <tr>
+        <td>{{ ev[0] }}</td>
+        <td>{{ ev[1] }}</td>
+        <td>{{ ev[2] }}</td>
+        <td>{{ ev[3] }}</td>
+        <td>{{ ev[4] }}</td>
+        <td>{{ ev[5] }}</td>
+        <td>{{ ev[6] }}</td>
+        <td>{{ ev[7] }}</td>
+        <td>{{ ev[8] }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="9">Nu exista evenimenteinca.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>
